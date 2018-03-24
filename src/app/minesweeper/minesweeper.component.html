@@ -1,0 +1,13 @@
+<div class="minesweeper">
+  <button class="smiley-button" (click)="reset()">Reset</button>
+  <div class="minesweeper-game">
+    <div *ngFor="let row of tiles" class="minesweeper-row">
+      <button *ngFor="let tile of row"
+              class="{{!tile.opened ? 'minesweeper-tile minesweeper-tile-closed' : tile.bomb ? 'minesweeper-tile minesweeper-tile-bomb' : 'minesweeper-tile minesweeper-tile-open'}}"
+              (click)="open(tile.x, tile.y)">
+        {{tile.neighbours === 0 || !tile.opened || tile.bomb ? '' : tile.neighbours}}
+        <img src="../../assets/bomb512x512-75.png" *ngIf="tile.bomb && tile.opened" class="bomb-img" height="20" width="20">
+      </button>
+    </div>
+  </div>
+</div>

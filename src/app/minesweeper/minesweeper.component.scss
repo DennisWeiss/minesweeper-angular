@@ -1,0 +1,33 @@
+.minesweeper {
+  margin: 30px auto;
+  width: 80%;
+  height: 70%;
+}
+
+.minesweeper-game {
+  margin: 10px 0;
+}
+
+.minesweeper-tile {
+  height: 40px;
+  width: 40px;
+  border: solid white 1px;
+  border-radius: 15%;
+}
+
+.minesweeper-tile-open {
+  background: lightgray;
+}
+
+.minesweeper-tile-closed {
+  background: gray;
+  cursor: pointer;
+}
+
+.minesweeper-tile-bomb {
+  background: red;
+}
+
+.bomb-img {
+  margin: 0;
+}
