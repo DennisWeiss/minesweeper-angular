@@ -1,3 +1,29 @@
-<p>
-  new-game works!
-</p>
+<div>
+  <div fxLayout fxLayoutAlign="right" class="new-game-property">
+    <div class="new-game-property">Width</div>
+    <mat-slider class="new-game-slider" min="2" max="40" step="1" [value]="data.width" (input)="change('width', $event.value)" (change)="change('width', $event.value)"></mat-slider>
+    <mat-form-field class="new-game-input" >
+      <input matInput type="number" [value]="data.width" (keyup)="change('width', $event.target.value)">
+    </mat-form-field>
+  </div>
+  <div fxLayout fxLayoutAlign="right" class="new-game-property">
+    <div class="new-game-property">Height</div>
+    <mat-slider class="new-game-slider" min="2" max="30" step="1" [value]="data.height" (input)="change('height', $event.value)" (change)="change('height', $event.value)"></mat-slider>
+    <mat-form-field class="new-game-input" >
+      <input matInput type="number" [value]="data.height" (keyup)="change('height', $event.target.value)">
+    </mat-form-field>
+  </div>
+  <div fxLayout fxLayoutAlign="right" class="new-game-property">
+    <div class="new-game-property">Bombs</div>
+    <mat-slider class="new-game-slider" min="1" [max]="data.width * data.height - 1" step="1" [value]="data.bombs" (input)="change('bombs', $event.value)" (change)="change('bombs', $event.value)"></mat-slider>
+    <mat-form-field class="new-game-input" >
+      <input matInput type="number" [value]="data.bombs" (keyup)="change('bombs', $event.target.value)">
+    </mat-form-field>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<div class="modal-options">
+  <button mat-button (click)="close()">Close</button>
+  <button mat-raised-button color="primary" (click)="ok()">OK</button>
+</div>
+

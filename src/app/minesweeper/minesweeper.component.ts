@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Tile} from './tile';
+import {NewGameComponent} from '../new-game/new-game.component';
+import {MatDialog} from '@angular/material';
+
 
 @Component({
   selector: 'app-minesweeper',
@@ -8,29 +11,53 @@ import {Tile} from './tile';
 })
 
 export class MinesweeperComponent implements OnInit {
-  width: number;
+  dialog: MatDialog;
+
   height: number;
+  width: number;
   bombs: number;
   tiles: Tile[][];
 
-  constructor() {
-    this.width = 20;
+  constructor(dialog: MatDialog) {
+    this.dialog = dialog;
     this.height = 15;
+    this.width = 25;
     this.bombs = 10;
     this.tiles = [];
     this.initialize();
   }
 
+  newGame = () => {
+    const newGameDialog = this.dialog.open(NewGameComponent, {
+      height: '330px',
+      width: '350px'
+    });
+
+    newGameDialog.componentInstance.data = {
+      width: this.width,
+      height: this.height,
+      bombs: this.bombs
+    };
+
+    newGameDialog.componentInstance.new = data => {
+      this.width = data.width;
+      this.height = data.height;
+      this.bombs = data.bombs;
+      this.initialize();
+    };
+  }
+
   initialize = () => {
-    for (let i = 0; i < this.height; i++) {
+    this.tiles = [];
+    for (let i = 0; i < this.width; i++) {
       this.tiles[i] = [];
-      for (let j = 0; j < this.width; j++) {
+      for (let j = 0; j < this.height; j++) {
         this.tiles[i][j] = new Tile(i, j);
       }
     }
     this.tiles = this.placeBombs(this.tiles, this.bombs);
-    for (let i = 0; i < this.height; i++) {
-      for (let j = 0; j < this.width; j++) {
+    for (let i = 0; i < this.width; i++) {
+      for (let j = 0; j < this.height; j++) {
         this.tiles[i][j].neighbours = this.neighbors(this.tiles, i, j);
       }
     }
