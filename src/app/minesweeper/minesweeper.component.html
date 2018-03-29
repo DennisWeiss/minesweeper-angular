@@ -7,7 +7,8 @@
   <div fxLayout fxLayoutAlign="center" class="minesweeper-game">
     <div *ngFor="let column of tiles" class="minesweeper-column">
       <button *ngFor="let tile of column"
-              class="{{!tile.opened ? 'minesweeper-tile minesweeper-tile-closed' : tile.bomb ? 'minesweeper-tile minesweeper-tile-bomb' : 'minesweeper-tile minesweeper-tile-open'}}"
+              class="{{!tile.opened ? 'minesweeper-tile minesweeper-tile-closed tile-' + tile.neighbours : tile.bomb ?
+              'minesweeper-tile minesweeper-tile-bomb tile-' + tile.neighbours : 'minesweeper-tile minesweeper-tile-open tile-' + tile.neighbours}}"
               (click)="open(tile.x, tile.y)">
         {{tile.neighbours === 0 || !tile.opened || tile.bomb ? '' : tile.neighbours}}
         <img src="../../assets/bomb512x512-75.png" *ngIf="tile.bomb && tile.opened" class="bomb-img" height="20"

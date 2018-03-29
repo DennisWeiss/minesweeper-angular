@@ -76,30 +76,57 @@ export class MinesweeperComponent implements OnInit {
     return tilesWthBombs;
   }
 
+  closedTiles = tiles => {
+    let closedTiles = 0;
+    tiles.map(column => {
+      column.map(tile => {
+        if (!tile.opened) {
+          closedTiles++;
+        }
+      });
+    });
+    return closedTiles;
+  }
+
+  won = () => {
+    return this.closedTiles(this.tiles) <= this.bombs;
+  }
+
   open = (x: number, y: number) => {
     if (x >= 0 && x < this.tiles.length && y >= 0 && y < this.tiles[x].length && !this.tiles[x][y].opened) {
       this.tiles[x][y].opened = true;
       if (this.tiles[x][y].bomb) {
-        for (let i = 0; i < this.tiles.length; i++) {
-          for (let j = 0; j < this.tiles[i].length; j++) {
-            this.tiles[i][j].opened = true;
-          }
-        }
-      }
-      if (this.tiles[x][y].neighbours === 0) {
-        for (let i = -1; i <= 1; i++) {
-          for (let j = -1; j <= 1; j++) {
-            if (!(i === 0 && j === 0)) {
-              console.log(i, j);
-              this.open(x + i, y + j);
+        this.lose();
+      } else {
+        if (this.tiles[x][y].neighbours === 0) {
+          for (let i = -1; i <= 1; i++) {
+            for (let j = -1; j <= 1; j++) {
+              if (!(i === 0 && j === 0)) {
+                console.log(i, j);
+                this.open(x + i, y + j);
+              }
             }
           }
+        }
+
+        if (this.won()) {
+          alert('You have won!');
         }
       }
     }
   }
 
-  reset = () => this.initialize();
+  lose = () => {
+    for (let i = 0; i < this.tiles.length; i++) {
+      for (let j = 0; j < this.tiles[i].length; j++) {
+        this.tiles[i][j].opened = true;
+      }
+    }
+  }
+
+  reset = () => {
+    this.initialize();
+  }
 
   neighbors = (tiles: Tile[][], x: number, y: number) => {
     let neighbours = 0;

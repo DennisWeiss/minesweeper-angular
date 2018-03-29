@@ -12,13 +12,15 @@ import {
   MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule, MatButtonModule, MatSliderModule, MatInputModule,
   MatFormFieldModule, MatDividerModule
 } from '@angular/material';
+import { ResetCounterComponent } from './reset-counter/reset-counter.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MinesweeperComponent,
-    NewGameComponent
+    NewGameComponent,
+    ResetCounterComponent
   ],
   imports: [
     BrowserModule,

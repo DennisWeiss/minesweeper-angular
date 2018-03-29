@@ -19,7 +19,7 @@
   //display: table-cell;
   //justify-content: space-around;
   border: solid white 1px;
-  border-radius: 15%;
+  border-radius: 6px;
 }
 
 .minesweeper-tile-open {
@@ -38,4 +38,38 @@
 .bomb-img {
   margin: 0;
 }
+
+.tile-1 {
+  color: blue;
+}
+
+.tile-2 {
+  color: green;
+}
+
+.tile-3 {
+  color: red;
+}
+
+.tile-4 {
+  color: darkblue;
+}
+
+.tile-5 {
+  color: saddlebrown;
+}
+
+.tile-6 {
+  color: cyan;
+}
+
+.tile-7 {
+  color: black;
+}
+
+.tile-8 {
+  color: grey;
+}
+
+
 
